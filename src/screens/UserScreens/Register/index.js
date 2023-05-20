@@ -11,13 +11,15 @@ import Logo from '../../../components/Logo';
 import Input from '../../../components/Input';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-export default function Login({ navigation }) {
+export default function Register({ navigation }) {
 
     const [login, setLogin] = useState(null);
     const [password, setPassword] = useState(null);
+    const [email, setEmail] = useState(null);
 
     const loginInput = createRef();
     const passwordInput = createRef();
+    const emailInput = createRef();
 
     return (
         <SafeAreaView style={styles.container}>
@@ -33,6 +35,15 @@ export default function Login({ navigation }) {
                     fontSize={50}
                 />
             </View>
+            <Input
+                ref={emailInput}
+                text={'Digite seu email'}
+                autoCapitalize='none'
+                value={email}
+                iconName={''}
+                autoCorrect={false}
+                onChangeText={setEmail}
+            />
             <Input
                 ref={loginInput}
                 text={'Digite seu login'}
@@ -53,11 +64,11 @@ export default function Login({ navigation }) {
                 onChangeText={setPassword}
             />
             <CustomButton
-                text="Entrar"
+                text="Cadastrar"
                 backgroundColor="#5079F2"
                 textColor="#FFFFFF"
                 onPress={() => {
-                    navigation.navigate('Home');
+                    navigation.navigate('Login');
                 }}
                 style={{ marginTop: 50 }}
             />

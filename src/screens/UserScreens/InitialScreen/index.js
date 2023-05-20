@@ -32,7 +32,7 @@ export default function InitialScreen({ navigation }) {
         backgroundColor="#5079F2"
         textColor="#FFFFFF"
         onPress={() => {
-          navigation.navigate('Login');
+          navigation.navigate('Register');
         }}
         style={{ marginBottom: 20 }}
       />
