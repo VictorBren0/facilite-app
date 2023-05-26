@@ -1,4 +1,4 @@
-import React, { useState, createRef, useEffect } from 'react';
+import React, { useState, createRef, useEffect, useContext } from 'react';
 import {
     TouchableOpacity,
     SafeAreaView,
@@ -10,15 +10,46 @@ import CustomButton from '../../../components/CustomButton';
 import Logo from '../../../components/Logo';
 import Input from '../../../components/Input';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { AuthContext } from '../../../context';
+import toastConfig from '../../../components/Toast';
+import Toast, {ErrorToast} from 'react-native-toast-message';
 
 export default function Login({ navigation }) {
 
-    const [login, setLogin] = useState(null);
+    const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
 
-    const loginInput = createRef();
+    const emailInput = createRef();
     const passwordInput = createRef();
 
+    const { login } = useContext(AuthContext);
+
+    useEffect(() => emailInput.current.resetError(), [email]);
+    useEffect(() => passwordInput.current.resetError(), [password]);
+
+    function validate() {
+        if (!email) {
+          Toast.show({
+            type: 'error',
+            text1: 'Email Inválido',
+            text2: 'Por favor, insira um email válido.',
+            icon: 'account-outline',
+          });
+          emailInput.current.focusOnError();
+          return false;
+        }
+        if (!password) {
+          Toast.show({
+            type: 'error',
+            text1: 'Senha Inválida',
+            text2: 'Por favor, insira uma senha válida.',
+            icon: 'lock-outline',
+          });
+          passwordInput.current.focusOnError();
+          return false;
+        }
+        return true;
+      }
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.contentBack}>
@@ -34,13 +65,13 @@ export default function Login({ navigation }) {
                 />
             </View>
             <Input
-                ref={loginInput}
+                ref={emailInput}
                 text={'Digite seu login'}
                 autoCapitalize='none'
-                value={login}
+                value={email}
                 iconName={''}
                 autoCorrect={false}
-                onChangeText={setLogin}
+                onChangeText={text => setEmail(text)}
             />
             <Input
                 ref={passwordInput}
@@ -50,15 +81,17 @@ export default function Login({ navigation }) {
                 iconName={''}
                 secureTextEntry
                 autoCorrect={false}
-                onChangeText={setPassword}
+                onChangeText={text => setPassword(text)}
             />
             <CustomButton
                 text="Entrar"
                 backgroundColor="#5079F2"
                 textColor="#FFFFFF"
                 onPress={() => {
-                    navigation.navigate('Home');
-                }}
+                    if (validate()) {
+                      login(email, password);
+                    }
+                  }}
                 style={{ marginTop: 50 }}
             />
         </SafeAreaView>

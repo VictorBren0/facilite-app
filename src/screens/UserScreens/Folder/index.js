@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, createRef } from 'react';
 import {
     Text,
     SafeAreaView,
@@ -9,10 +9,14 @@ import {
 import styles from './styles';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import FileButton from '../../../components/FileButton';
+import { useRoute } from '@react-navigation/native';
 
 
 export default function Folder({ navigation }) {
+    
+    const route = useRoute();
 
+    const data = route.params?.data;
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.contentHeader}> 
@@ -24,7 +28,7 @@ export default function Folder({ navigation }) {
                 </TouchableOpacity>
             </View>
             <View style={styles.titleContent}>
-            <Text style={styles.titleHeader}>Pasta</Text>
+            <Text style={styles.titleHeader}>{data.nome}</Text>
             </View>
 
                 <View style={styles.contentIcon}>

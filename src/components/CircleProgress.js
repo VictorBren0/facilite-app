@@ -25,7 +25,7 @@ const CircleProgress = ({ percentage: spaceUsed }) => {
     <View style={styles.container}>
       <View style={styles.circle}>
         <Animated.View style={[styles.circleFill, { height: circleFillAnimation }]} />
-        <Text style={styles.spaceUsedText}>{spaceUsed}MB/1GB</Text>
+        <Text style={styles.spaceUsedText}>{spaceUsed}/1GB</Text>
       </View>
     </View>
   );
@@ -35,10 +35,11 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
+    position: 'relative',
   },
   circle: {
-    width: 170,
-    height: 170,
+    width: 160,
+    height: 160,
     borderRadius: 100,
     borderWidth: 5,
     borderColor: '#C0C0C0',

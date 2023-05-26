@@ -1,12 +1,12 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import Stack from './stacks/stackMain';
+import {AuthProvider} from '../context';
+import AppNav from './AppNav';
+
 
 export default function () {
-  const auth = true
   return (
-      <NavigationContainer>
-        <Stack/>
-      </NavigationContainer>
+    <AuthProvider>
+        <AppNav />
+        </AuthProvider>
   );
 }
