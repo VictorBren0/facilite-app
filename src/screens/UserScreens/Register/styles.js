@@ -20,6 +20,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginBottom: 100
     },
+    text:{
+      fontSize: 20,
+      color: '#FFFFFF',
+      marginBottom: 40
+  }
 
   });
   export default styles;

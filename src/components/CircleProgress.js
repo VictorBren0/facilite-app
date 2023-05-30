@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Animated, Text, StyleSheet } from 'react-native';
 
-const CircleProgress = ({ percentage: spaceUsed }) => {
+const CircleProgress = ({ percentage: spaceUsed, letter }) => {
   const animatedValue = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const CircleProgress = ({ percentage: spaceUsed }) => {
     <View style={styles.container}>
       <View style={styles.circle}>
         <Animated.View style={[styles.circleFill, { height: circleFillAnimation }]} />
-        <Text style={styles.spaceUsedText}>{spaceUsed}/1GB</Text>
+        <Text style={styles.spaceUsedText}>{spaceUsed}{letter}/1GB</Text>
       </View>
     </View>
   );

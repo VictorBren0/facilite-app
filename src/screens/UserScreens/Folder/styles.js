@@ -39,6 +39,42 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#000000',
     },
+    containerButton: {
+        position: 'absolute',
+        bottom: 16,
+        right: 16,
+    },
+    button: {
+        backgroundColor: '#1D1D2E',
+        borderRadius: 32,
+        width: 64,
+        height: 64,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    confirmButton: {
+        backgroundColor: 'green',
+        borderRadius: 8,
+        paddingHorizontal: 12,
+        paddingVertical: 6,
+        alignItems: 'center',
+        marginBottom: 5
+    },
+    containerModal: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    modal: {
+        backgroundColor: '#ffffff',
+        width: 300,
+        height: 200,
+        borderRadius: 20,
+        elevation: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+
+    },
 
 });
 export default styles;

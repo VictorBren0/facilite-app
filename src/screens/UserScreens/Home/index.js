@@ -29,7 +29,7 @@ export default function Home({ navigation }) {
     const [folders, setFolders] = useState([]);
     const [visible, setVisible] = useState(false)
     const [newFolder, setNewFolder] = useState(null)
-    
+
 
     const { logout, userToken, userParams } = useContext(AuthContext);
     const newFolderInput = createRef();
@@ -66,11 +66,28 @@ export default function Home({ navigation }) {
 
     const handleSearch = (text) => {
         const filteredFolders = folders.pastas.filter((folder) =>
-          folder.nome.toLowerCase().includes(text.toLowerCase())
+            folder.nome.toLowerCase().includes(text.toLowerCase())
         );
         setSearchResults(filteredFolders);
-      };
-    const formattedSize = parseInt(folders.tamanhoTotalFormatado); // Formata o tamanho para um número inteiro
+    };
+
+    let formattedSize = 0; // Defina um valor padrão para evitar erros
+    let letter = 'B'; // Defina um valor padrão para evitar erros
+
+    if (folders.tamanhoTotalFormatado) {
+        letter = folders.tamanhoTotalFormatado.split(' ')[1]; // Obtém a parte com a letra
+
+        if (letter === 'B') {
+            formattedSize = parseInt(folders.tamanhoTotalFormatado) * 0.001
+        } else if (letter === 'K') {
+            formattedSize = parseFloat(folders.tamanhoTotalFormatado) * 0.001;
+        } else if (letter === 'M') {
+            formattedSize = parseFloat(folders.tamanhoTotalFormatado);
+        }
+    }
+
+
+
 
     return (
         <SafeAreaView style={styles.container}>
@@ -79,18 +96,13 @@ export default function Home({ navigation }) {
                     <Text style={styles.textLogout}>Sair</Text>
                     <Icon name={'logout'} size={30} color={'#CC0000'} />
                 </TouchableOpacity>
-                <CircleProgress percentage={formattedSize + 'M'} />
+                <CircleProgress percentage={formattedSize} letter={letter} />
             </View>
             <View style={styles.contentIcon}>
                 <TouchableOpacity onPress={() => {
                     setVisible(true);
                 }}>
                     <Icon name={'create-new-folder'} size={40} color={'#000000'} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => {
-                    navigation.navigate('Folder');
-                }}>
-                    <Icon name={'note-add'} size={40} color={'#000000'} />
                 </TouchableOpacity>
             </View>
             <SearchBar onSearch={handleSearch} />
@@ -105,18 +117,18 @@ export default function Home({ navigation }) {
                     numColumns={3}
                     renderItem={({ item }) => (
                         <TouchableOpacity key={item.id}
-                        onPress={() => {
-                            navigation.navigate('Folder', { data: item });
-                        }}
-                        style={[styles.contentFolders, { width: itemWidth }]}
+                            onPress={() => {
+                                navigation.navigate('Folder', { data: item });
+                            }}
+                            style={[styles.contentFolders, { width: itemWidth }]}
                         >
                             <Icon name={'folder'} size={60} color={'#000000'} />
-                            <Text style={{ textAlign: 'center' }}>{item.nome}</Text>
+                            <Text style={{ textAlign: 'center', color: '#000000' }}>{item.nome}</Text>
                         </TouchableOpacity>
                     )}
                     ListEmptyComponent={() => (
                         <Text style={styles.emptyMessage}>Nenhum resultado encontrado</Text>
-                      )}
+                    )}
                 />
             </View>
             <Modal

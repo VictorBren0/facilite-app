@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 80,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         paddingHorizontal: 20,
         alignItems: 'center',
     },
@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         marginTop: 10,
         marginBottom: 10,
+        color: '#000000',
 
     },
     flatlistContent: {

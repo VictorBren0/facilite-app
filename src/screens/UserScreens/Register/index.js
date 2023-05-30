@@ -3,6 +3,7 @@ import {
     TouchableOpacity,
     SafeAreaView,
     View,
+    Text
 } from 'react-native';
 
 import styles from './styles';
@@ -64,6 +65,8 @@ export default function Register({ navigation }) {
                     fontSize={50}
                 />
             </View>
+            <Text style={styles.text}>Realize seu cadastro</Text>
+
             <Input
                 ref={emailInput}
                 text={'Digite seu email'}
